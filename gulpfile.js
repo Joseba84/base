@@ -18,7 +18,6 @@ stylelint = require('stylelint');
 browserSync = require('browser-sync');
 inlinesource = require('gulp-inline-source');
 uncss = require('gulp-uncss');
-webp = require('gulp-webp');
 responsive = require('gulp-responsive');
 
 gulp.task("browserSync", function() {
@@ -171,12 +170,6 @@ gulp.task('removecss', function() {
         }));
 });
 
-gulp.task('webp', () =>
-    gulp.src('img/*.jpg')
-        .pipe(webp())
-        .pipe(gulp.dest('img'))
-);
-
 gulp.task('imgrwd', function () {
   return gulp.src('src/img/*.{png,jpg}')
     .pipe(responsive({
@@ -218,11 +211,11 @@ gulp.task('default', ["browserSync"], function() {
 });
 
 /* Tarea final para comprimir CSS y JavaScript. Eliminar el CSS sin usar e incluirlo en línea en el HTML
-    Por último creamos las imágenes con diferentes tamaños y las pasamos a WebP.
+    Por último creamos las imágenes con diferentes tamaños.
 */
 
 // Build para un proyecto sin imágenes
 gulp.task('build', ['minify', 'compress', 'removecss', 'inline']);
 
 //Build para un proyecto con imágenes
-gulp.task('buildimg', ['minify', 'compress', 'removecss', 'inline' , 'imgrwd' , 'webp']);
+gulp.task('buildimg', ['minify', 'compress', 'removecss', 'inline' , 'imgrwd']);
